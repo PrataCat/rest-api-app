@@ -20,6 +20,6 @@ router.get("/:contactId", validateById, getById);
 
 router.delete("/:contactId", validateById, removeOne);
 
-router.put("/:contactId", validateById, updateOne);
+router.put("/:contactId", validateById, validateBody(), updateOne);
 
 module.exports = router;
