@@ -19,10 +19,6 @@ const getContactById = async (contactId) => {
   const contacts = await listContacts();
   const contact = contacts.find((contact) => contact.id === contactId);
 
-  if (!contact) {
-    return null;
-  }
-
   return contact;
 };
 
@@ -30,10 +26,6 @@ const removeContact = async (contactId) => {
   const contacts = await listContacts();
   const contactToDel = contacts.find((contact) => contact.id === contactId);
   const index = contacts.findIndex((contact) => contact.id === contactId);
-
-  if (index === -1) {
-    return null;
-  }
 
   contacts.splice(index, 1);
   await writeFile(contactsPath, JSON.stringify(contacts, null, 2));
@@ -47,7 +39,9 @@ const addContact = async (body) => {
   const newContact = { ...body, id: v4() };
 
   if (contacts.some((contact) => contact.phone === newContact.phone)) {
-    return console.log("This contact already exists.");
+    const message = "This contact already exists.";
+
+    return message;
   }
 
   contacts.push(newContact);
@@ -59,10 +53,6 @@ const addContact = async (body) => {
 const updateContact = async (contactId, body) => {
   const contacts = await listContacts();
   const index = contacts.findIndex((contact) => contact.id === contactId);
-
-  if (index === -1) {
-    return null;
-  }
 
   contacts[index] = { ...body, id: contactId };
 
