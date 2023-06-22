@@ -1,14 +1,65 @@
-// const fs = require('fs/promises')
+const { readFile, writeFile } = require("fs").promises;
+const path = require("path");
+const { v4 } = require("uuid");
 
-const listContacts = async () => {}
+const contactsPath = path.join(__dirname, "contacts.json");
 
-const getContactById = async (contactId) => {}
+const listContacts = async () => {
+  try {
+    const data = await readFile(contactsPath);
+    const contacts = JSON.parse(data);
 
-const removeContact = async (contactId) => {}
+    return contacts;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
-const addContact = async (body) => {}
+const getContactById = async (contactId) => {
+  const contacts = await listContacts();
+  const contact = contacts.find((contact) => contact.id === contactId);
 
-const updateContact = async (contactId, body) => {}
+  return contact;
+};
+
+const removeContact = async (contactId) => {
+  const contacts = await listContacts();
+  const contactToDel = contacts.find((contact) => contact.id === contactId);
+  const index = contacts.findIndex((contact) => contact.id === contactId);
+
+  contacts.splice(index, 1);
+  await writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+
+  return contactToDel;
+};
+
+const addContact = async (body) => {
+  const contacts = await listContacts();
+
+  const newContact = { ...body, id: v4() };
+
+  if (contacts.some((contact) => contact.phone === newContact.phone)) {
+    const message = "This contact already exists.";
+
+    return message;
+  }
+
+  contacts.push(newContact);
+  await writeFile(contactsPath, JSON.stringify(contacts));
+
+  return newContact;
+};
+
+const updateContact = async (contactId, body) => {
+  const contacts = await listContacts();
+  const index = contacts.findIndex((contact) => contact.id === contactId);
+
+  contacts[index] = { ...body, id: contactId };
+
+  await writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+
+  return contacts[index];
+};
 
 module.exports = {
   listContacts,
@@ -16,4 +67,4 @@ module.exports = {
   removeContact,
   addContact,
   updateContact,
-}
+};
