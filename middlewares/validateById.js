@@ -1,19 +1,23 @@
+const CustomError = require("../helpers/customError");
 const { listContacts } = require("../models/contacts");
 
 const validateById = async (req, res, next) => {
-  const { contactId } = req.params;
+  try {
+    const { contactId } = req.params;
 
-  const contacts = await listContacts();
+    const contacts = await listContacts();
 
-  const contact = contacts.find((contact) => contact.id === contactId);
+    const contact = contacts.find((contact) => contact.id === contactId);
 
-  if (!contact) {
-    return res.status(404).json({ message: "Not found" });
+    if (!contact) {
+      // return res.status(404).json({ message: "Not found" });
+      throw new CustomError(404, "Not found");
+    }
+
+    req.contact = contact;
+  } catch (err) {
+    next(err);
   }
-
-  req.contact = contact;
-
-  next();
 };
 
 module.exports = validateById;
