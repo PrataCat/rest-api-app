@@ -1,9 +1,17 @@
-const { updateContact } = require("../../models/contacts");
+const Contact = require("../../models/contacts");
 
 const updateOne = async (req, res) => {
   const { contactId } = req.params;
 
-  const result = await updateContact(contactId, req.body);
+  const result = await Contact.findByIdAndUpdate(
+    contactId,
+    {
+      name: req.body.name,
+      email: req.body.email,
+      phone: req.body.phone,
+    },
+    { new: true }
+  ).select("-__v");
 
   res.json(result);
 };

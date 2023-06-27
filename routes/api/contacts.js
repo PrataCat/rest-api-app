@@ -22,4 +22,16 @@ router.delete("/:contactId", validateById, removeOne);
 
 router.put("/:contactId", validateById, validateBody(), updateOne);
 
+// const router = express.Router();
+
+// router.get("/", getAll);
+
+// router.post("/", addOne);
+
+// router.get("/:contactId", getById);
+
+// router.delete("/:contactId", removeOne);
+
+// router.put("/:contactId", updateOne);
+
 module.exports = router;

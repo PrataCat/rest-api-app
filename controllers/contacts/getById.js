@@ -1,13 +1,12 @@
-// const { getContactById } = require("../../models/contacts");
+const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
+const Contact = require("../../models/contacts");
 
 const getById = async (req, res) => {
-  // const { contactId } = req.params;
-  // const result = await getContactById(contactId);
-  // res.json(result);
+  const { contactId } = req.params;
 
-  const { contact } = req;
+  const contact = await Contact.findById(contactId).select("-__v");
 
   res.json(contact);
 };
 
-module.exports = getById;
+module.exports = catchAsyncWrapper(getById);
