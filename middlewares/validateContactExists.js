@@ -1,14 +1,17 @@
-const CustomError = require("../../helpers/CustomError");
-const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
-const Contact = require("../../models/contacts");
+const CustomError = require("../helpers/CustomError");
+const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
+const Contact = require("../models/contacts");
 
 const validateContactExists = catchAsyncWrapper(async (req, res, next) => {
-  const contactExists = await Contact.exists({ phone: req.body.phone });
+  const { phone } = req.body;
 
-  if (!contactExists)
-    return next(new CustomError(400, "Contact already exists"));
+  const contactExists = await Contact.exists({ phone: phone });
 
-  next()
+  if (contactExists) {
+    return next(new CustomError(400, `Contact ${phone} already exists`));
+  }
+
+  next();
 });
 
 module.exports = validateContactExists;

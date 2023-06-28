@@ -1,5 +1,5 @@
 const CustomError = require("../helpers/CustomError");
-const favoriteValidator = require("../helpers");
+const { favoriteValidator } = require("../helpers");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
 const validateFavorite = () => {
@@ -13,7 +13,7 @@ const validateFavorite = () => {
     const { error } = favoriteValidator(req.body);
 
     if (error) {
-      next(new CustomError(400, "Missing field favorite"));
+      return next(new CustomError(400, "Missing field favorite"));
     }
 
     next();

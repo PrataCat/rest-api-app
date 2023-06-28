@@ -20,6 +20,7 @@ const validateBody = () => {
 
     next();
   });
+
   return func;
 };
 
