@@ -1,8 +1,9 @@
 const { contactValidator } = require("../helpers/contactValidator");
 const CustomError = require("../helpers/CustomError");
+const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
 const validateBody = () => {
-  const func = async (req, res, next) => {
+  const func = catchAsyncWrapper(async (req, res, next) => {
     const { name, email, phone } = req.body;
 
     if (!name && !email && !phone) {
@@ -18,7 +19,7 @@ const validateBody = () => {
     }
 
     next();
-  };
+  });
   return func;
 };
 
