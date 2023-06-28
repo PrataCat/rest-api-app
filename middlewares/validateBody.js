@@ -1,4 +1,4 @@
-const { contactValidator } = require("../helpers/contactValidator");
+const { contactValidator } = require("../helpers");
 const CustomError = require("../helpers/CustomError");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 

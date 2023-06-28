@@ -4,9 +4,9 @@ const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
 const validateFavorite = () => {
   const func = catchAsyncWrapper(async (req, res, next) => {
-    const { favorite } = req.body;
+    const result = req.body;
 
-    if (!favorite) {
+    if (result.length === 0) {
       return next(new CustomError(400, "missing field favorite"));
     }
 
