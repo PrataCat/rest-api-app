@@ -3,7 +3,6 @@ const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
 const User = require("../../models/user");
 
 const register = catchAsyncWrapper(async (req, res, next) => {
-  console.log("registerUser");
   const { email } = req.body;
 
   const user = await User.findOne({ email });
@@ -13,7 +12,6 @@ const register = catchAsyncWrapper(async (req, res, next) => {
   }
 
   const newUser = await User.create(req.body);
-  console.log(newUser);
 
   res.status(201).json({
     user: {
