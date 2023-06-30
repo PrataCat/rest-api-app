@@ -1,7 +1,9 @@
-const { contactValidator } = require("../helpers/contactValidator");
+const { contactValidator } = require("../helpers");
+const CustomError = require("../helpers/CustomError");
+const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
 const validateBody = () => {
-  const func = async (req, res, next) => {
+  const func = catchAsyncWrapper(async (req, res, next) => {
     const { name, email, phone } = req.body;
 
     if (!name && !email && !phone) {
@@ -13,13 +15,12 @@ const validateBody = () => {
     if (error) {
       const field = error.details[0].path[0];
 
-      return res
-        .status(400)
-        .json({ message: `Missing required '${field}' field` });
+      return next(new CustomError(400, `Missing required '${field}' field`));
     }
 
     next();
-  };
+  });
+
   return func;
 };
 

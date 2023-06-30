@@ -1,11 +1,12 @@
-const { removeContact } = require("../../models/contacts");
+const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
+const Contact = require("../../models/contacts");
 
-const removeOne = async (req, res) => {
+const removeOne = catchAsyncWrapper(async (req, res) => {
   const { contactId } = req.params;
 
-  await removeContact(contactId);
+  await Contact.findByIdAndDelete(contactId);
 
   res.json({ message: "Contact deleted" });
-};
+});
 
 module.exports = removeOne;

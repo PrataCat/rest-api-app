@@ -1,14 +1,20 @@
-const { listContacts } = require("../models/contacts");
+const { Types } = require("mongoose");
+
+const CustomError = require("../helpers/CustomError");
+const Contact = require("../models/contacts");
+const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
 const validateById = async (req, res, next) => {
   const { contactId } = req.params;
 
-  const contacts = await listContacts();
+  const idIsValid = Types.ObjectId.isValid(contactId);
 
-  const contact = contacts.find((contact) => contact.id === contactId);
+  if (!idIsValid) return next(new CustomError(400, "Invalid id"));
+
+  const contact = await Contact.findById(contactId);
 
   if (!contact) {
-    return res.status(404).json({ message: "Not found" });
+    return next(new CustomError(404, "Not found"));
   }
 
   req.contact = contact;
@@ -16,4 +22,4 @@ const validateById = async (req, res, next) => {
   next();
 };
 
-module.exports = validateById;
+module.exports = catchAsyncWrapper(validateById);
