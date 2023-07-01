@@ -14,10 +14,12 @@ const {
   validateBody,
   validateFavorite,
   validateContactExists,
+  authenticate,
 } = require("../../middlewares");
 
 const router = express.Router();
 
+router.use("/", authenticate);
 router.use("/:contactId", validateById);
 
 router
