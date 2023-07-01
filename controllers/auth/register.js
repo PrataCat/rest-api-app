@@ -1,9 +1,10 @@
 const CustomError = require("../../helpers/CustomError");
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
 const User = require("../../models/user");
+const { createHashPass } = require("../../helpers/hashPass");
 
 const register = catchAsyncWrapper(async (req, res, next) => {
-  const { email } = req.body;
+  const { email, password } = req.body;
 
   const user = await User.findOne({ email });
 
@@ -11,7 +12,9 @@ const register = catchAsyncWrapper(async (req, res, next) => {
     return next(new CustomError(409, "Email in use"));
   }
 
-  const newUser = await User.create(req.body);
+  const hashPass = await createHashPass(password);
+
+  const newUser = await User.create({ ...req.body, password: hashPass });
 
   res.status(201).json({
     user: {
