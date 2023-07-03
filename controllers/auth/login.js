@@ -26,7 +26,7 @@ const login = catchAsyncWrapper(async (req, res, next) => {
     id: user._id,
   };
 
-  const token = jwt.sign(payload, JWT_KEY, { expiresIn: "23h" });
+  const token = jwt.sign(payload, JWT_KEY, { expiresIn: "24h" });
 
   await User.findByIdAndUpdate(user._id, { token });
 

@@ -31,7 +31,7 @@ router
   .route("/:contactId")
   .get(getById)
   .delete(removeOne)
-  .put(validateBody(), validateContactExists, updateOne);
+  .put(validateBody(), updateOne);
 
 router.patch("/:contactId/favorite", validateFavorite(), updateStatusContact);
 
