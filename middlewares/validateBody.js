@@ -7,7 +7,7 @@ const validateBody = () => {
     const { name, email, phone } = req.body;
 
     if (!name && !email && !phone) {
-      return res.status(400).json({ message: "missing fields" });
+      return next(new CustomError(400, "Missing fields"));
     }
 
     const { error } = contactValidator(req.body);

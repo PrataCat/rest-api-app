@@ -9,7 +9,7 @@ const updateStatusContact = async (req, res) => {
       favorite: req.body.favorite,
     },
     { new: true }
-  ).select("-__v");
+  );
 
   res.status(200).json(result);
 };

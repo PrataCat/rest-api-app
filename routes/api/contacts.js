@@ -1,4 +1,5 @@
 const express = require("express");
+
 const {
   getAll,
   getById,
@@ -13,25 +14,25 @@ const {
   validateBody,
   validateFavorite,
   validateContactExists,
+  authenticate,
 } = require("../../middlewares");
 
 const router = express.Router();
 
-router.get("/", getAll);
+router.use("/", authenticate);
+router.use("/:contactId", validateById);
 
-router.post("/", validateBody(), validateContactExists, addOne);
+router
+  .route("/")
+  .get(getAll)
+  .post(validateBody(), validateContactExists, addOne);
 
-router.get("/:contactId", validateById, getById);
+router
+  .route("/:contactId")
+  .get(getById)
+  .delete(removeOne)
+  .put(validateBody(), updateOne);
 
-router.delete("/:contactId", validateById, removeOne);
-
-router.put("/:contactId", validateById, validateBody(), updateOne);
-
-router.patch(
-  "/:contactId/favorite",
-  validateById,
-  validateFavorite(),
-  updateStatusContact
-);
+router.patch("/:contactId/favorite", validateFavorite(), updateStatusContact);
 
 module.exports = router;

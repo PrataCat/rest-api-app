@@ -11,7 +11,7 @@ const updateOne = async (req, res) => {
       phone: req.body.phone,
     },
     { new: true }
-  ).select("-__v");
+  );
 
   res.json(result);
 };

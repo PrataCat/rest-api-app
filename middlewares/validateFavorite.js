@@ -7,7 +7,7 @@ const validateFavorite = () => {
     const result = req.body;
 
     if (result.length === 0) {
-      return next(new CustomError(400, "missing field favorite"));
+      return next(new CustomError(400, "Missing field favorite"));
     }
 
     const { error } = favoriteValidator(req.body);

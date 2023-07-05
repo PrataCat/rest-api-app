@@ -4,7 +4,7 @@ const CustomError = require("../helpers/CustomError");
 const Contact = require("../models/contacts");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
-const validateById = async (req, res, next) => {
+const validateById = catchAsyncWrapper(async (req, res, next) => {
   const { contactId } = req.params;
 
   const idIsValid = Types.ObjectId.isValid(contactId);
@@ -20,6 +20,6 @@ const validateById = async (req, res, next) => {
   req.contact = contact;
 
   next();
-};
+});
 
-module.exports = catchAsyncWrapper(validateById);
+module.exports = validateById;
