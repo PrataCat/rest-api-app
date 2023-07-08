@@ -1,4 +1,5 @@
 const { Types } = require("mongoose");
+// const { isValidObjectId } = require("mongoose");
 
 const CustomError = require("../helpers/CustomError");
 const Contact = require("../models/contacts");
@@ -8,6 +9,9 @@ const validateById = catchAsyncWrapper(async (req, res, next) => {
   const { contactId } = req.params;
 
   const idIsValid = Types.ObjectId.isValid(contactId);
+
+  // if (!isValidObjectId(contactId))
+  //   return next(new CustomError(400, "Invalid id"));
 
   if (!idIsValid) return next(new CustomError(400, "Invalid id"));
 

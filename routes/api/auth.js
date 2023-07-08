@@ -6,12 +6,14 @@ const {
   logout,
   getCurrent,
   updateSubscription,
+  updateAvatar,
 } = require("../../controllers/auth");
 
 const {
   validateUser,
   authenticate,
   validateSubscription,
+  upload,
 } = require("../../middlewares");
 
 const router = express.Router();
@@ -21,5 +23,8 @@ router.post("/login", validateUser(), login);
 router.post("/logout", authenticate, logout);
 router.get("/current", authenticate, getCurrent);
 router.patch("/", authenticate, validateSubscription(), updateSubscription);
+router.patch("/avatars", authenticate, upload.single("avatar"), updateAvatar);
+// upload.array([{name: "avatar", maxCount: 1}, {name: "emblem", maxCount: 1}])
+// upload.fields("avatar", <max number of files>)
 
 module.exports = router;
