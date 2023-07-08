@@ -15,6 +15,13 @@ const updateAvatar = catchAsyncWrapper(async (req, res, next) => {
     return new CustomError(400, "Missing 'avatar' field");
   }
 
+  const img = await jimp.read(req.file.path);
+
+  await img
+    .autocrop()
+    .cover(250, 250, jimp.HORIZONTAL_ALIGN_CENTER || jimp.VERTICAL_ALIGN_MIDDLE)
+    .writeAsync(req.file.path);
+
   const { path: tempUpload, originalname } = req.file;
   const { _id } = req.user;
 
