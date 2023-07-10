@@ -1,3 +1,4 @@
+const gravatar = require("gravatar");
 const CustomError = require("../../helpers/CustomError");
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
 const User = require("../../models/user");
@@ -14,7 +15,11 @@ const register = catchAsyncWrapper(async (req, res, next) => {
 
   const hashPass = await createHashPass(password);
 
-  const newUser = await User.create({ ...req.body, password: hashPass });
+  const newUser = await User.create({
+    ...req.body,
+    password: hashPass,
+    avatarURL: gravatar.url(email),
+  });
 
   res.status(201).json({
     user: {
