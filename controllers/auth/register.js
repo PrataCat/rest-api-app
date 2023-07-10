@@ -1,5 +1,5 @@
 const gravatar = require("gravatar");
-const CustomError = require("../../helpers/CustomError");
+const CustomError = require("../../helpers/сustomError");
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
 const User = require("../../models/user");
 const { createHashPass } = require("../../helpers/hashPass");

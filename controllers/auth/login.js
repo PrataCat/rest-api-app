@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { comparePass } = require("../../helpers/hashPass");
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
-const CustomError = require("../../helpers/CustomError");
+const CustomError = require("../../helpers/сustomError");
 const User = require("../../models/user");
 
 const { JWT_KEY } = process.env;
