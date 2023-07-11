@@ -7,18 +7,23 @@ const {
   getCurrent,
   updateSubscription,
   updateAvatar,
+  verifyEmail,
+  resendVerifyEmail,
 } = require("../../controllers/auth");
 
 const {
   validateUser,
   authenticate,
   validateSubscription,
+  validateEmail,
   upload,
 } = require("../../middlewares");
 
 const router = express.Router();
 
 router.post("/register", validateUser(), register);
+router.get("/verify/:verificationToken", verifyEmail);
+router.post("/verify", validateEmail(), resendVerifyEmail);
 router.post("/login", validateUser(), login);
 router.post("/logout", authenticate, logout);
 router.get("/current", authenticate, getCurrent);

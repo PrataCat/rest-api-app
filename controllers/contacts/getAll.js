@@ -1,5 +1,5 @@
 const { favoriteValidator } = require("../../helpers");
-const CustomError = require("../../helpers/сustomError");
+const CustomError = require("../../helpers/customError");
 const Contact = require("../../models/contacts");
 
 const getAll = async (req, res, next) => {
