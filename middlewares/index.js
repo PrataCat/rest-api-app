@@ -5,6 +5,7 @@ const validateContactExists = require("./validateContactExists");
 const validateUser = require("./validateUser");
 const authenticate = require("./authenticate");
 const validateSubscription = require("./validateSubscription");
+const validateEmail = require("./validateEmail");
 const upload = require("./upload");
 
 module.exports = {
@@ -15,5 +16,6 @@ module.exports = {
   validateUser,
   authenticate,
   validateSubscription,
+  validateEmail,
   upload,
 };
