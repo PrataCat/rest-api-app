@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const CustomError = require("../helpers/CustomError");
+const CustomError = require("../helpers/customError");
 const User = require("../models/user");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 

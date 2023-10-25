@@ -1,5 +1,5 @@
 const { subscriptionValidator } = require("../helpers");
-const CustomError = require("../helpers/CustomError");
+const CustomError = require("../helpers/customError");
 
 const validateSubscription = () => {
   const func = async (req, res, next) => {

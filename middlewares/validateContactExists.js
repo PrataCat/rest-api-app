@@ -1,4 +1,4 @@
-const CustomError = require("../helpers/CustomError");
+const CustomError = require("../helpers/customError");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 const Contact = require("../models/contacts");
 

@@ -1,4 +1,4 @@
-const CustomError = require("../helpers/CustomError");
+const CustomError = require("../helpers/customError");
 const { favoriteValidator } = require("../helpers");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
