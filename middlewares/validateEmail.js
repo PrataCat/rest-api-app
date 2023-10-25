@@ -1,5 +1,5 @@
 const { emailValidator } = require("../helpers");
-const CustomError = require("../helpers/customError");
+const CustomError = require("../helpers/CustomError");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
 const validateEmail = () => {

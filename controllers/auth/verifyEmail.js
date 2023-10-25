@@ -1,5 +1,5 @@
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
-const CustomError = require("../../helpers/customError");
+const CustomError = require("../../helpers/CustomError");
 const User = require("../../models/user");
 
 const verifyEmail = catchAsyncWrapper(async (req, res, next) => {

@@ -1,4 +1,4 @@
-const CustomError = require("./customError");
+const CustomError = require("./CustomError");
 
 const handleMongooseError = (error, data, next) => {
   const { name, code } = error;
