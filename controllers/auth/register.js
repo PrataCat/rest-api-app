@@ -1,7 +1,7 @@
 const gravatar = require("gravatar");
 const { v4 } = require("uuid");
 
-const CustomError = require("../../helpers/CustomError");
+const CustomError = require("../../helpers/customError");
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
 const User = require("../../models/user");
 const { createHashPass } = require("../../helpers/hashPass");

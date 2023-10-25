@@ -1,5 +1,5 @@
 const { contactValidator } = require("../helpers");
-const CustomError = require("../helpers/CustomError");
+const CustomError = require("../helpers/customError");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
 const validateBody = () => {

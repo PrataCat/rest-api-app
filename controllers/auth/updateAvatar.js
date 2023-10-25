@@ -3,7 +3,7 @@ const path = require("path");
 const jimp = require("jimp");
 
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
-const CustomError = require("../../helpers/CustomError");
+const CustomError = require("../../helpers/customError");
 const User = require("../../models/user");
 
 const avatarsDir = path.join(__dirname, "../../", "public", "avatars");

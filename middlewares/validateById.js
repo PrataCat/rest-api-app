@@ -1,7 +1,7 @@
 const { Types } = require("mongoose");
 // const { isValidObjectId } = require("mongoose");
 
-const CustomError = require("../helpers/CustomError");
+const CustomError = require("../helpers/customError");
 const Contact = require("../models/contacts");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
